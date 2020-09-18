@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import songlib.view.ListController;
 
 public class SongLib extends Application {
 
@@ -13,15 +14,18 @@ public class SongLib extends Application {
 		// TODO Auto-generated method stub
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/songlib/view/songlib.fxml"));
-		System.out.println(loader.getLocation());
 		GridPane root = (GridPane) loader.load();
+		
+		
 		Scene scene = new Scene(root);
 
 		primaryStage.setScene(scene);
-
+		
 		primaryStage.setTitle("Song Library");
 		primaryStage.setResizable(false);
 		primaryStage.show();
+		ListController listController = loader.getController();
+		listController.start();
 	}
 
 	public static void main(String[] args) {
