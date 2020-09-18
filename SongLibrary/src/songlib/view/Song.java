@@ -38,7 +38,6 @@ public class Song implements Comparable<Song> {
 		return year;
 	}
 
-	@Override
 	public int compareTo(Song s) {
 		
 		int name = songTitle.compareToIgnoreCase(s.getTitle());

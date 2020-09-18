@@ -25,7 +25,7 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" >
          <children>
-            <ListView id="listView" layoutX="-8.0" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="listView" layoutX="-8.0" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
       <Button id="add" onAction="#add" mnemonicParsing="false" text="Add" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
