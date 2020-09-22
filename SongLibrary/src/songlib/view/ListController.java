@@ -34,8 +34,9 @@ public class ListController {
 		Song input = new Song(songInput.getText(), artistInput.getText(), albumInput.getText(), yearInput.getText());
 		if (!(obsList.contains(input))) {
 			obsList.add(input);
-			listView.getSelectionModel().select(obsList.size()-1);
 			FXCollections.sort(obsList);
+			listView.getSelectionModel().select(input);
+			listView.scrollTo(input);
 		}
 		else {
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -54,6 +55,26 @@ public class ListController {
 	}
 
 	public void delete(ActionEvent e) {
-
+		
+		if(obsList.size() <= 0) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Error Message");
+			
+			alert.setHeaderText("Your command was invalid.");
+			alert.setContentText("No song selected.");
+			
+			alert.showAndWait();
+			return;
+		}
+		Song toDelete = obsList.get(listView.getSelectionModel().getSelectedIndex());
+		int index = obsList.indexOf(toDelete);
+		if(index == obsList.size() - 1) {
+			listView.getSelectionModel().selectPrevious();
+		}
+		else if(index + 1 < obsList.size()) {
+			listView.getSelectionModel().selectNext();
+		}
+		
+		obsList.remove(toDelete);
 	}
 }
