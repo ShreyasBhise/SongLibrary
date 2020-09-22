@@ -28,17 +28,17 @@
             <ListView fx:id="listView" layoutX="-8.0" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
-      <Button id="add" onAction="#add" mnemonicParsing="false" text="Add" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <Button fx:id="add" onAction="#add" mnemonicParsing="false" text="Add" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button id="edit" mnemonicParsing="false" onAction="#edit" text="Edit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <Button fx:id="edit" mnemonicParsing="false" onAction="#edit" text="Edit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button id="delete" minWidth="50.0" mnemonicParsing="false" onAction="#delete" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <Button fx:id="delete" minWidth="50.0" mnemonicParsing="false" onAction="#delete" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>

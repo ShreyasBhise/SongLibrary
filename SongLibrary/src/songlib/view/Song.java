@@ -48,6 +48,17 @@ public class Song implements Comparable<Song> {
 		
 		return name;
 	}
+	@Override
+	public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(!(o instanceof Song))
+			return false;
+		Song s = (Song) o;
+		
+		return this.songTitle.contentEquals(s.getTitle()) && this.artistName.equals(s.getArtist());
+		
+	}
 	public String toString() {
 		return songTitle + " by " + artistName + "\n";
 	}
