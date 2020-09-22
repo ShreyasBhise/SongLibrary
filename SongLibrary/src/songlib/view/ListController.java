@@ -34,6 +34,7 @@ public class ListController {
 		Song input = new Song(songInput.getText(), artistInput.getText(), albumInput.getText(), yearInput.getText());
 		if (!(obsList.contains(input))) {
 			obsList.add(input);
+			listView.getSelectionModel().select(obsList.size()-1);
 			FXCollections.sort(obsList);
 		}
 		else {
