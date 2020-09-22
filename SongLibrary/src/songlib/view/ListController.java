@@ -74,7 +74,7 @@ public class ListController {
 
 	public void delete(ActionEvent e) {
 		
-		if(obsList.size() <= 0) {
+		if(obsList.size() <= 0) { //If the list is empty.
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Error Message");
 			
