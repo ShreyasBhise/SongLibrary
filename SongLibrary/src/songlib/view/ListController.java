@@ -1,5 +1,7 @@
 package songlib.view;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,9 +30,25 @@ public class ListController {
 		// ""));
 		listView.setItems(obsList);
 		listView.getSelectionModel().select(0);
+		listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Song>() {
+			public void changed(ObservableValue<? extends Song> observable, Song oldValue, Song newValue) {
+				System.out.println("New selected Value: "+newValue.getTitle());
+			}
+		});
 	}
 
 	public void add(ActionEvent e) {
+		if(songInput.getText().equals("") || artistInput.getText().equals("")){
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Error Message");
+			
+			alert.setHeaderText("Your command was invalid.");
+			String content = "Song name and Artist name must both be filled out.";
+			alert.setContentText(content);
+			
+			alert.showAndWait();
+			return;
+		}
 		Song input = new Song(songInput.getText(), artistInput.getText(), albumInput.getText(), yearInput.getText());
 		if (!(obsList.contains(input))) {
 			obsList.add(input);
