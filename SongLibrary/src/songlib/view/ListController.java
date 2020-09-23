@@ -1,5 +1,12 @@
 package songlib.view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -45,10 +52,58 @@ public class ListController {
 				updateDisplay();
 			}
 		});
+		String filePath = "src/songlist.txt";
+		File file = new File(filePath);
+		if(!file.exists()) {
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		Scanner sc = null;
+		try {
+			sc = new Scanner(file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(!sc.hasNextLine()) {
+			System.out.println("Error Reading File");
+			return;
+		}
+		String s = sc.nextLine();
+		int n = Integer.parseInt(s);
+		for(int i = 0; i<n; i++) {
+			String input[] = new String[4];
+			for(int j = 0; j<4; j++) {
+			if(!sc.hasNextLine()) {
+				System.out.println("Error Reading File");
+				return;
+			}
+			input[j] = sc.nextLine();
+			}
+			Song song = new Song(input[0], input[1], input[2], input[3]);
+			obsList.add(song);
+		}
+		sc.close();
+		if(obsList.size()>0) {
+			listView.getSelectionModel().select(0);
+		}
 	}
 	
 	public void updateDisplay() {
-		Song temp = obsList.get(listView.getSelectionModel().getSelectedIndex());
+		if(obsList.size() <= 0) { //If the list is empty.
+			dispTitle.setText("");
+			dispArtist.setText("");
+			dispAlbum.setText("");
+			dispYear.setText("");
+			return;
+		}
+		int n = listView.getSelectionModel().getSelectedIndex();
+		if(n<0 || n>=obsList.size()) return;
+		System.out.println(n);
+		Song temp = obsList.get(n);
 		dispTitle.setText(temp.getTitle());
 		dispArtist.setText(temp.getArtist());
 		dispAlbum.setText(temp.getAlbum());
@@ -84,6 +139,7 @@ public class ListController {
 			
 			alert.showAndWait();
 		}
+		fileWrite();
 	}
 
 	public void edit(ActionEvent e) {
@@ -128,6 +184,7 @@ public class ListController {
 			
 			alert.showAndWait();
 		}
+		fileWrite();
 	}
 
 	public void delete(ActionEvent e) {
@@ -152,5 +209,25 @@ public class ListController {
 		}
 		
 		obsList.remove(toDelete);
+		fileWrite();
+	}
+	
+	public void fileWrite() {
+		String filePath = "src/songlist.txt";
+		try {
+			FileWriter fileWriter = new FileWriter(filePath);
+			fileWriter.write(obsList.size()+"\n");
+			for(int i = 0; i<obsList.size(); i++) {
+				Song s = obsList.get(i);
+				fileWriter.write(s.getTitle()+"\n");
+				fileWriter.write(s.getArtist()+"\n");
+				fileWriter.write(s.getAlbum()+"\n");
+				fileWriter.write(s.getYear()+"\n");
+			}
+			if(fileWriter!=null) fileWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
