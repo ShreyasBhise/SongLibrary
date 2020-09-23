@@ -211,7 +211,7 @@ public class ListController {
 	}
 
 	public void fileWrite() {
-		String filePath = "src/songlib/viewsonglist.txt";
+		String filePath = "src/songlib/view/songlist.txt";
 		try {
 			FileWriter fileWriter = new FileWriter(filePath);
 			fileWriter.write(obsList.size() + "\n");
